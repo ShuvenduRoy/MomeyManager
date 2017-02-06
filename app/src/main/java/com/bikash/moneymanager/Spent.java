@@ -70,9 +70,8 @@ public class Spent extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                MainActivity.remaining += MainActivity.spentArrayList.get(position).getCost();
                                 MainActivity.spentArrayList.remove(position);
-
                                 memoAdapter.notifyDataSetChanged();
 
                             }

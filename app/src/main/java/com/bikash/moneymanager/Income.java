@@ -67,9 +67,8 @@ public class Income extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
+                                MainActivity.remaining -= MainActivity.incomeArrayList.get(position).getCost();
                                 MainActivity.incomeArrayList.remove(position);
-
                                 memoAdapter.notifyDataSetChanged();
 
                             }
