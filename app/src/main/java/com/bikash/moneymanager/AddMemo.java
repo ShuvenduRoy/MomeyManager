@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.renderscript.Double2;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -62,10 +63,23 @@ public class AddMemo extends AppCompatActivity {
 
             Memo m = new Memo(str1, l);
 
-            MainActivity.incomeArrayList.add(m);
+            if(index<0){
+                MainActivity.incomeArrayList.add(m);
 
-            MainActivity.remaining +=l;
-            sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
+                MainActivity.remaining +=l;
+                sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
+            }
+
+            else {
+
+                double diff = l - MainActivity.incomeArrayList.get(index).getCost();
+                Log.d("string_", Double.toString(diff));
+
+                MainActivity.remaining += diff;
+
+                MainActivity.incomeArrayList.set(index, m);
+                sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
+            }
 
         }
 
@@ -76,10 +90,21 @@ public class AddMemo extends AppCompatActivity {
 
             Memo m = new Memo(str1, l);
 
-            MainActivity.spentArrayList.add(m);
+            if(index<0){
+                MainActivity.spentArrayList.add(m);
 
-            MainActivity.remaining -=l;
-            sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
+                MainActivity.remaining -=l;
+                sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
+            } else {
+
+                double diff = l - MainActivity.spentArrayList.get(index).getCost();
+                Log.d("string_", Double.toString(diff));
+
+                MainActivity.remaining -= diff;
+
+                MainActivity.spentArrayList.set(index, m);
+                sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
+            }
 
         }
 

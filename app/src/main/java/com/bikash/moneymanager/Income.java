@@ -51,7 +51,7 @@ public class Income extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Intent i = new Intent(getApplicationContext(), AddMemo.class);
-                i.putExtra("Id", (position+1)*10+2);
+                i.putExtra("Id", (position+1)*10+1);
                 startActivity(i);
             }
         });
