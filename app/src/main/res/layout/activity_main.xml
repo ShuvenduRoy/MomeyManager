@@ -13,7 +13,7 @@
         android:background="@drawable/round_green"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fixed Cost"
+        android:text="Income"
         android:id="@+id/fixedCostTextView"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -28,12 +28,26 @@
         android:background="@drawable/round_green"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Extra Spent"
+        android:text="Spent"
         android:id="@+id/extraSpentTextView"
         android:layout_below="@+id/fixedCostTextView"
         android:layout_centerHorizontal="true"
         android:padding="5dp"
         android:textSize="20dp" />
+
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="300dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_green"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="History"
+        android:id="@+id/historyMainActivityTextView"
+        android:layout_below="@+id/extraSpentTextView"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:padding="5dp" />
 
     <TextView
         android:background="@color/category_numbers"
@@ -50,16 +64,16 @@
         android:textSize="25dp" />
 
     <TextView
-        android:layout_margin="5dp"
-        android:layout_width="300dp"
-        android:textAlignment="center"
-        android:background="@drawable/round_green"
+        android:background="@color/category_numbers"
+        android:padding="5dp"
+        android:layout_margin="-100dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="History"
-        android:id="@+id/historyMainActivityTextView"
-        android:layout_below="@+id/extraSpentTextView"
-        android:layout_centerHorizontal="true"
-        android:textSize="20dp"
-        android:padding="5dp" />
+        android:text="Large Text"
+        android:id="@+id/remainTextView"
+        android:layout_above="@+id/totalTextView"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
 </RelativeLayout>
