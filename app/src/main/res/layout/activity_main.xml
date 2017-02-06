@@ -61,7 +61,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:textAlignment="center"
-        android:textSize="25dp" />
+        android:textSize="20dp" />
 
     <TextView
         android:background="@color/LinkedInBlue"
@@ -74,6 +74,6 @@
         android:id="@+id/remainTextView"
         android:layout_above="@+id/totalTextView"
         android:textAlignment="center"
-        android:textSize="25dp" />
+        android:textSize="20dp" />
 
 </RelativeLayout>
