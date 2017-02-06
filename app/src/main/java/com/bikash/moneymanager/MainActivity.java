@@ -206,8 +206,7 @@ public class MainActivity extends AppCompatActivity {
         checkMonthChanged();
 
 
-        totalTextView.setText("Total Spent "+ Integer.toString(total.intValue())+ " /=");
-        remainingTextView.setText("Remaining "+Integer.toString(remaining.intValue())+" /=");
+        setText();
 
     }
 
@@ -265,8 +264,7 @@ public class MainActivity extends AppCompatActivity {
         totalSpent = Calculation.sumofExtra();
         total = totalSpent;
 
-        totalTextView.setText("Total Spent "+ Integer.toString(total.intValue())+ " /=");
-        remainingTextView.setText("Remaining "+Integer.toString(remaining.intValue())+" /=");
+        setText();
 
     }
 
@@ -291,8 +289,12 @@ public class MainActivity extends AppCompatActivity {
         total = totalSpent + totalIncome;
 
 
-        totalTextView.setText("Total Spent "+ Integer.toString(total.intValue())+ " /=");
-        remainingTextView.setText("Remaining "+Integer.toString(remaining.intValue())+" /=");
+        setText();
+    }
+
+    private void setText() {
+        totalTextView.setText("Total Spent : "+ Integer.toString(total.intValue())+ " /=");
+        remainingTextView.setText("You have : "+Integer.toString(remaining.intValue())+" /=");
     }
 
     @Override
