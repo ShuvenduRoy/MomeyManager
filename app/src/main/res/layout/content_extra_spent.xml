@@ -28,7 +28,7 @@
             android:paddingTop="5dp"
             android:id="@+id/totalExtraSpentTextView"
             android:text="Total"
-            android:background="@color/orange"
+            android:background="@color/Purple"
             android:textAlignment="center"
             android:textSize="20dp"
             android:layout_width="match_parent"
