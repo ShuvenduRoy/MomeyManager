@@ -50,7 +50,7 @@
         android:padding="5dp" />
 
     <TextView
-        android:background="@color/category_numbers"
+        android:background="@color/Purple"
         android:padding="5dp"
         android:layout_margin="-100dp"
         android:layout_width="match_parent"
@@ -64,7 +64,7 @@
         android:textSize="25dp" />
 
     <TextView
-        android:background="@color/category_numbers"
+        android:background="@color/LinkedInBlue"
         android:padding="5dp"
         android:layout_margin="-100dp"
         android:layout_width="match_parent"
