@@ -56,6 +56,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentLeft="true"
         app:srcCompat="@mipmap/money"
-        android:layout_above="@+id/bikash2"
+
+        android:layout_below="@+id/passwordButton"
         android:id="@+id/imageView3" />
 </RelativeLayout>
