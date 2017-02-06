@@ -52,7 +52,7 @@ public class AddMemo extends AppCompatActivity {
 
             Memo m = new Memo(str1, l);
 
-            MainActivity.fixedCostArrayList.add(m);
+            MainActivity.incomeArrayList.add(m);
 
         }
 
@@ -63,7 +63,9 @@ public class AddMemo extends AppCompatActivity {
 
             Memo m = new Memo(str1, l);
 
-            MainActivity.extraSpentArrayList.add(m);
+            MainActivity.spentArrayList.add(m);
+
+            MainActivity.remaining -=l;
 
         }
 

@@ -8,8 +8,8 @@ public class Calculation {
     public static Double sumofFixed(){
         Double total = 0.0;
 
-        for(int i=0; i<MainActivity.fixedCostArrayList.size(); i++){
-            total += MainActivity.fixedCostArrayList.get(i).getCost();
+        for(int i = 0; i<MainActivity.incomeArrayList.size(); i++){
+            total += MainActivity.incomeArrayList.get(i).getCost();
         }
 
         return  total;
@@ -18,8 +18,8 @@ public class Calculation {
     public static Double sumofExtra(){
         Double total = 0.0;
 
-        for(int i=0; i<MainActivity.extraSpentArrayList.size(); i++){
-            total += MainActivity.extraSpentArrayList.get(i).getCost();
+        for(int i = 0; i<MainActivity.spentArrayList.size(); i++){
+            total += MainActivity.spentArrayList.get(i).getCost();
         }
 
 

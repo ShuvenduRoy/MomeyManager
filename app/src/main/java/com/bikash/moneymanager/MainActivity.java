@@ -20,11 +20,12 @@ public class MainActivity extends AppCompatActivity {
 
     SQLiteDatabase myDatabase;
 
-    public static ArrayList<Memo> fixedCostArrayList;
-    public static ArrayList<Memo> extraSpentArrayList;
-    public static Double totalFixed;
-    public static Double totalExtra;
+    public static ArrayList<Memo> incomeArrayList;
+    public static ArrayList<Memo> spentArrayList;
+    public static Double totalIncome;
+    public static Double totalSpent;
     public static Double total;
+    public static Double remaining;
     public static Map<Integer, String> monthMap = new HashMap<>();
 
     int month;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     TextView extraSpentTextView;
     TextView historyView;
     TextView totalTextView;
+    TextView remainingTextView;
 
     public static String password = "";
     public static String userPass="";
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        remaining =0.0;
 
         monthMap.put(0, "January");
         monthMap.put(1, "February");
@@ -74,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
             String s = sharedPreferences.getString("password", "");
             monthInFile = sharedPreferences.getInt("month", -1);
             yearInFile = sharedPreferences.getInt("year", -1);
+            remaining = Double.valueOf(sharedPreferences.getString("remaining","0.0"));
 
             Log.i("c month", String.valueOf(month));
             Log.i("f month", String.valueOf(monthInFile));
@@ -99,8 +104,8 @@ public class MainActivity extends AppCompatActivity {
         myDatabase = this.openOrCreateDatabase("Cost", MODE_PRIVATE, null);
         myDatabase.execSQL("CREATE TABLE IF NOT EXISTS fixedCost (name VARCHAR, cost VARCHAR)");
 
-        fixedCostArrayList = new ArrayList<>();
-        extraSpentArrayList = new ArrayList<>();
+        incomeArrayList = new ArrayList<>();
+        spentArrayList = new ArrayList<>();
 
         try{
             myDatabase.execSQL("CREATE TABLE IF NOT EXISTS fixedCost (name VARCHAR, cost VARCHAR)");
@@ -121,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                 Double l = Double.valueOf(costString);
                 Memo m = new Memo(name, l);
 
-                fixedCostArrayList.add(m);
+                incomeArrayList.add(m);
 
                 c.moveToNext();
             }
@@ -152,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
                 Double l = Double.valueOf(costString);
                 Memo m = new Memo(name, l);
 
-                extraSpentArrayList.add(m);
+                spentArrayList.add(m);
 
                 c.moveToNext();
             }
@@ -169,11 +174,12 @@ public class MainActivity extends AppCompatActivity {
         extraSpentTextView = (TextView) findViewById(R.id.extraSpentTextView);
         historyView = (TextView) findViewById(R.id.historyMainActivityTextView);
         totalTextView = (TextView) findViewById(R.id.totalTextView);
+        remainingTextView = (TextView) findViewById(R.id.remainTextView);
 
         fixedCostTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, FixedCost.class);
+                Intent i = new Intent(MainActivity.this, Income.class);
                 startActivity(i);
             }
         });
@@ -181,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
         extraSpentTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(MainActivity.this, ExtraSpent.class);
+                Intent i = new Intent(MainActivity.this, Spent.class);
                 startActivity(i);
             }
         });
@@ -193,9 +199,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        totalFixed = Calculation.sumofFixed();
-        totalExtra = Calculation.sumofExtra();
-        total = totalExtra + totalFixed;
+        totalIncome = Calculation.sumofFixed();
+        totalSpent = Calculation.sumofExtra();
+        total = totalSpent + totalIncome;
 
         checkMonthChanged();
 
@@ -236,8 +242,8 @@ public class MainActivity extends AppCompatActivity {
 
 
             //Reset extraspent
-            totalExtra = 0.0;
-            extraSpentArrayList.clear();
+            totalSpent = 0.0;
+            spentArrayList.clear();
             myDatabase.delete("extraSpent",null, null);
 
 
@@ -251,9 +257,9 @@ public class MainActivity extends AppCompatActivity {
 
         //authorise();
 
-        totalFixed = Calculation.sumofFixed();
-        totalExtra = Calculation.sumofExtra();
-        total = totalExtra + totalFixed;
+        totalIncome = Calculation.sumofFixed();
+        totalSpent = Calculation.sumofExtra();
+        total = totalSpent;
 
 
         totalTextView.setText(Double.toString(total)+ " /=");
@@ -276,12 +282,13 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-        totalFixed = Calculation.sumofFixed();
-        totalExtra = Calculation.sumofExtra();
-        total = totalExtra + totalFixed;
+        totalIncome = Calculation.sumofFixed();
+        totalSpent = Calculation.sumofExtra();
+        total = totalSpent + totalIncome;
 
 
         totalTextView.setText(Double.toString(total) + " /=");
+        remainingTextView.setText(Double.toString(remaining)+" /=");
     }
 
     @Override
@@ -293,26 +300,26 @@ public class MainActivity extends AppCompatActivity {
         myDatabase.execSQL("CREATE TABLE IF NOT EXISTS extraSpent (name VARCHAR, cost VARCHAR)");
 
 
-        for(int i=0; i<fixedCostArrayList.size(); i++){
-            String name = fixedCostArrayList.get(i).getMemoName();
-            String cost = Double.toString(fixedCostArrayList.get(i).getCost());
+        for(int i = 0; i< incomeArrayList.size(); i++){
+            String name = incomeArrayList.get(i).getMemoName();
+            String cost = Double.toString(incomeArrayList.get(i).getCost());
             String sql = "INSERT INTO fixedCost (name, cost) VALUES ('"+name+"', '"+ cost+  "') ";
             myDatabase.execSQL(sql);
 
             Log.i("Insert", "Successful");
         }
 
-        for(int i=0; i<extraSpentArrayList.size(); i++){
-            String name = extraSpentArrayList.get(i).getMemoName();
-            String cost = Double.toString(extraSpentArrayList.get(i).getCost());
+        for(int i = 0; i< spentArrayList.size(); i++){
+            String name = spentArrayList.get(i).getMemoName();
+            String cost = Double.toString(spentArrayList.get(i).getCost());
             String sql = "INSERT INTO extraSpent (name, cost) VALUES ('"+name+"', '"+ cost+  "') ";
             myDatabase.execSQL(sql);
 
             Log.i("Insert", "Successful");
         }
 
-        fixedCostArrayList.clear();
-        extraSpentArrayList.clear();
+        incomeArrayList.clear();
+        spentArrayList.clear();
 
         sharedPreferences.edit().putString("password", password).apply();
         sharedPreferences.edit().putInt("year", year).apply();

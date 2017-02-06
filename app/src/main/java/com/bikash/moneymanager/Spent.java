@@ -2,46 +2,49 @@ package com.bikash.moneymanager;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class FixedCost extends AppCompatActivity {
+public class Spent extends AppCompatActivity {
 
     private MemoAdapter memoAdapter;
     ListView listView;
+
     TextView totalTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fixed__spent);
-
-        totalTextView = (TextView) findViewById(R.id.totalFixedAmountTextView);
+        setContentView(R.layout.activity_extra_cost);
 
 
+        totalTextView = (TextView) findViewById(R.id.totalExtraSpentTextView);
 
-        memoAdapter = new MemoAdapter(this, R.layout.list_item, MainActivity.fixedCostArrayList);
-        listView = (ListView) findViewById(R.id.fixedCostListView);
+
+
+        memoAdapter = new MemoAdapter(this, R.layout.list_item, MainActivity.spentArrayList);
+        listView = (ListView) findViewById(R.id.fextraSpentListView);
         listView.setAdapter(memoAdapter);
 
-        MainActivity.totalFixed = Calculation.sumofFixed();
-        MainActivity.total = MainActivity.totalExtra + MainActivity.totalFixed;
-        totalTextView.setText(Double.toString(MainActivity.totalFixed)+ " /=");
+        MainActivity.totalSpent = Calculation.sumofExtra();
+        MainActivity.total = MainActivity.totalSpent + MainActivity.totalIncome;
+        totalTextView.setText(Double.toString(MainActivity.totalSpent)+ " /=");
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_fixed);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab_extra);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
                 Intent i = new Intent(getApplicationContext(), AddMemo.class);
-                i.putExtra("Id", 1);
+                i.putExtra("Id", 2);
                 startActivity(i);
 
             }
@@ -60,7 +63,7 @@ public class FixedCost extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
 
-                new AlertDialog.Builder(FixedCost.this)
+                new AlertDialog.Builder(Spent.this)
                         .setIcon(android.R.drawable.ic_dialog_alert)
                         .setTitle("Are you sure?")
                         .setMessage("Do you want to delete this note?")
@@ -68,7 +71,7 @@ public class FixedCost extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                MainActivity.fixedCostArrayList.remove(position);
+                                MainActivity.spentArrayList.remove(position);
 
                                 memoAdapter.notifyDataSetChanged();
 
@@ -80,24 +83,23 @@ public class FixedCost extends AppCompatActivity {
                 return true;
             }
         });
-
-
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
 
-        MainActivity.totalFixed = Calculation.sumofFixed();
-        totalTextView.setText(Double.toString(MainActivity.totalFixed)+ " /=");
+        MainActivity.totalSpent = Calculation.sumofExtra();
+        totalTextView.setText(Double.toString(MainActivity.totalSpent)+ " /=");
         memoAdapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        MainActivity.totalFixed = Calculation.sumofFixed();
-        totalTextView.setText(Double.toString(MainActivity.totalFixed)+ " /=");
+
+        MainActivity.totalSpent = Calculation.sumofExtra();
+        totalTextView.setText(Double.toString(MainActivity.totalSpent)+ " /=");
         memoAdapter.notifyDataSetChanged();
     }
 }
