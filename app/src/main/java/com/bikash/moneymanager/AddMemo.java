@@ -17,6 +17,7 @@ public class AddMemo extends AppCompatActivity {
     SharedPreferences sharedPreferences;
 
     int key;
+    int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +29,9 @@ public class AddMemo extends AppCompatActivity {
         et2 = (EditText) findViewById(R.id.spentAmountTextView);
 
         Intent i = getIntent();
-        key = i.getIntExtra("Id", -1);
+        int k = i.getIntExtra("Id", -1);
+        key = k%10;
+        index = k/10-1;
         Log.i("Oncreate", String.valueOf(key));
     }
 
@@ -49,6 +52,9 @@ public class AddMemo extends AppCompatActivity {
 
         Log.i("String", str1);
         Log.i("String", str2);
+
+        Log.i("String", String.valueOf(key));
+        Log.i("String", String.valueOf(index));
 
         if(key == 1){
 
