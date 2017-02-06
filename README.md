@@ -30,7 +30,7 @@ The app has security system to access the data
   <img src="https://github.com/Bikash300895/MomeyManager/blob/master/ScreenShot/Screenshot_20170308-162249.png" width="250"/>
 </p>
 
-
+Finally the summery of each month is stored in history section
 <p align="center">
   <img src="https://github.com/Bikash300895/MomeyManager/blob/master/ScreenShot/Screenshot_20170406-162553.png" width="250"/>
 </p>
