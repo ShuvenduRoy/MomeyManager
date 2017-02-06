@@ -34,6 +34,16 @@ public class AddMemo extends AppCompatActivity {
         key = k%10;
         index = k/10-1;
         Log.i("Oncreate", String.valueOf(key));
+
+        if(index>=0){
+            if(key==1){
+                et1.setText(MainActivity.incomeArrayList.get(index).getMemoName());
+                et2.setText(MainActivity.incomeArrayList.get(index).getCost().toString());
+            } else if(key==2){
+                et1.setText(MainActivity.spentArrayList.get(index).getMemoName());
+                et2.setText(MainActivity.spentArrayList.get(index).getCost().toString());
+            }
+        }
     }
 
     public void SaveButton(View view){
