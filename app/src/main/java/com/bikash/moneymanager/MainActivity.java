@@ -207,7 +207,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        totalTextView.setText(Double.toString(total)+ " /=");
+        totalTextView.setText("Total Spent "+Double.toString(total) + " /=");
+        remainingTextView.setText("Remaining "+Double.toString(remaining)+" /=");
 
     }
 
@@ -234,10 +235,12 @@ public class MainActivity extends AppCompatActivity {
     public void checkMonthChanged(){
         if(monthInFile!=month && monthInFile!=-1){
             //Save to history
-            String name = monthMap.get(monthInFile) + ", " + String.valueOf(year);
-            String cost = Double.toString(total);
+            String spent = monthMap.get(monthInFile) + ", " + String.valueOf(year) + " Spent";
+            String income = monthMap.get(monthInFile) + ", " + String.valueOf(year) + " Income";
             myDatabase.execSQL("CREATE TABLE IF NOT EXISTS history (name VARCHAR, cost VARCHAR)");
-            String sql = "INSERT INTO history (name, cost) VALUES ('"+name+"', '"+ cost+  "') ";
+            String sql = "INSERT INTO history (name, cost) VALUES ('"+spent+"', '"+ totalSpent.toString()+  "') ";
+            myDatabase.execSQL(sql);
+            sql = "INSERT INTO history (name, cost) VALUES ('"+income   +"', '"+ totalIncome.toString()+  "') ";
             myDatabase.execSQL(sql);
 
 
@@ -245,6 +248,8 @@ public class MainActivity extends AppCompatActivity {
             totalSpent = 0.0;
             spentArrayList.clear();
             myDatabase.delete("extraSpent",null, null);
+            incomeArrayList.clear();
+            myDatabase.delete("fixedCost",null, null);
 
 
         }
@@ -262,7 +267,8 @@ public class MainActivity extends AppCompatActivity {
         total = totalSpent;
 
 
-        totalTextView.setText(Double.toString(total)+ " /=");
+        totalTextView.setText("Total Spent "+Double.toString(total) + " /=");
+        remainingTextView.setText("Remaining "+Double.toString(remaining)+" /=");
 
     }
 
@@ -287,8 +293,8 @@ public class MainActivity extends AppCompatActivity {
         total = totalSpent + totalIncome;
 
 
-        totalTextView.setText(Double.toString(total) + " /=");
-        remainingTextView.setText(Double.toString(remaining)+" /=");
+        totalTextView.setText("Total Spent "+Double.toString(total) + " /=");
+        remainingTextView.setText("Remaining "+Double.toString(remaining)+" /=");
     }
 
     @Override

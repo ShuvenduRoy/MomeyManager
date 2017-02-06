@@ -16,8 +16,7 @@ public class History extends AppCompatActivity {
     private MemoAdapter memoAdapter;
     ArrayList<Memo> historyList;
     SQLiteDatabase myDatabase;
-    TextView historyTextView;
-    Double total = 0.0;
+
 
 
     @Override
@@ -30,7 +29,6 @@ public class History extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.historyListView);
         myDatabase = this.openOrCreateDatabase("Cost", MODE_PRIVATE, null);
         memoAdapter = new MemoAdapter(this, R.layout.list_item, historyList);
-        historyTextView = (TextView) findViewById(R.id.tatalinHistoryTextview);
 
 
         historyList.clear();
@@ -72,13 +70,6 @@ public class History extends AppCompatActivity {
         }
 
         listView.setAdapter(memoAdapter);
-
-        for(int i=0; i<historyList.size(); i++){
-            total += historyList.get(i).getCost();
-        }
-
-        historyTextView.setText(Double.toString(total)+ " /=");
-
 
 
     }
