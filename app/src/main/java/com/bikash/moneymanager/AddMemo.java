@@ -1,6 +1,8 @@
 package com.bikash.moneymanager;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -12,6 +14,7 @@ public class AddMemo extends AppCompatActivity {
 
     EditText et1;
     EditText et2;
+    SharedPreferences sharedPreferences;
 
     int key;
 
@@ -19,6 +22,7 @@ public class AddMemo extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_memo);
+        sharedPreferences = this.getSharedPreferences("com.bikash.moneymanager", Context.MODE_PRIVATE);
 
         et1 = (EditText) findViewById(R.id.descriptionTextView);
         et2 = (EditText) findViewById(R.id.spentAmountTextView);
@@ -54,6 +58,9 @@ public class AddMemo extends AppCompatActivity {
 
             MainActivity.incomeArrayList.add(m);
 
+            MainActivity.remaining +=l;
+            sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
+
         }
 
 
@@ -66,6 +73,7 @@ public class AddMemo extends AppCompatActivity {
             MainActivity.spentArrayList.add(m);
 
             MainActivity.remaining -=l;
+            sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
 
         }
 
