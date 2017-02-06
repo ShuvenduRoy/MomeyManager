@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/blue_boll"
+    tools:context="com.bikash.moneymanager.MainActivity">
+
+    <TextView
+        android:layout_marginBottom="5dp"
+        android:layout_width="300dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_green"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Fixed Cost"
+        android:id="@+id/fixedCostTextView"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="70dp"
+        android:padding="5dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="300dp"
+        android:layout_margin="5dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_green"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Extra Spent"
+        android:id="@+id/extraSpentTextView"
+        android:layout_below="@+id/fixedCostTextView"
+        android:layout_centerHorizontal="true"
+        android:padding="5dp"
+        android:textSize="20dp" />
+
+    <TextView
+        android:background="@color/category_numbers"
+        android:padding="5dp"
+        android:layout_margin="-100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/totalTextView"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:textSize="25dp" />
+
+    <TextView
+        android:layout_margin="5dp"
+        android:layout_width="300dp"
+        android:textAlignment="center"
+        android:background="@drawable/round_green"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="History"
+        android:id="@+id/historyMainActivityTextView"
+        android:layout_below="@+id/extraSpentTextView"
+        android:layout_centerHorizontal="true"
+        android:textSize="20dp"
+        android:padding="5dp" />
+</RelativeLayout>
