@@ -233,23 +233,23 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void checkMonthChanged(){
-        if(monthInFile!=month && monthInFile!=-1){
-            //Save to history
-            String spent = monthMap.get(monthInFile) + ", " + String.valueOf(year) + " Spent";
-            String income = monthMap.get(monthInFile) + ", " + String.valueOf(year) + " Income";
-            myDatabase.execSQL("CREATE TABLE IF NOT EXISTS history (name VARCHAR, cost VARCHAR)");
-            String sql = "INSERT INTO history (name, cost) VALUES ('"+spent+"', '"+ totalSpent.toString()+  "') ";
-            myDatabase.execSQL(sql);
-            sql = "INSERT INTO history (name, cost) VALUES ('"+income   +"', '"+ totalIncome.toString()+  "') ";
-            myDatabase.execSQL(sql);
+            if(monthInFile!=month && monthInFile!=-1){
+                //Save to history
+                String spent = monthMap.get(monthInFile) + ", " + String.valueOf(year) + " Spent";
+                String income = monthMap.get(monthInFile) + ", " + String.valueOf(year) + " Income";
+                myDatabase.execSQL("CREATE TABLE IF NOT EXISTS history (name VARCHAR, cost VARCHAR)");
+                String sql = "INSERT INTO history (name, cost) VALUES ('"+spent+"', '"+ totalSpent.toString()+  "') ";
+                myDatabase.execSQL(sql);
+                sql = "INSERT INTO history (name, cost) VALUES ('"+income   +"', '"+ totalIncome.toString()+  "') ";
+                myDatabase.execSQL(sql);
 
 
-            //Reset extraspent
-            totalSpent = 0.0;
-            spentArrayList.clear();
-            myDatabase.delete("extraSpent",null, null);
-            incomeArrayList.clear();
-            myDatabase.delete("fixedCost",null, null);
+                //Reset extraspent
+                totalSpent = 0.0;
+                spentArrayList.clear();
+                myDatabase.delete("extraSpent",null, null);
+                incomeArrayList.clear();
+                myDatabase.delete("fixedCost",null, null);
 
 
         }
