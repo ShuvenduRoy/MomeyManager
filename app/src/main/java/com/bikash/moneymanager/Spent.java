@@ -1,7 +1,9 @@
 package com.bikash.moneymanager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -17,6 +19,7 @@ public class Spent extends AppCompatActivity {
     ListView listView;
 
     TextView totalTextView;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +28,7 @@ public class Spent extends AppCompatActivity {
 
 
         totalTextView = (TextView) findViewById(R.id.totalExtraSpentTextView);
-
+        sharedPreferences = this.getSharedPreferences("com.bikash.moneymanager", Context.MODE_PRIVATE);
 
 
         memoAdapter = new MemoAdapter(this, R.layout.list_item, MainActivity.spentArrayList);
@@ -73,6 +76,9 @@ public class Spent extends AppCompatActivity {
                                 MainActivity.remaining += MainActivity.spentArrayList.get(position).getCost();
                                 MainActivity.spentArrayList.remove(position);
                                 memoAdapter.notifyDataSetChanged();
+
+
+                                sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
 
                             }
                         })

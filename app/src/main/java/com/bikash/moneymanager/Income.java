@@ -1,7 +1,9 @@
 package com.bikash.moneymanager;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AlertDialog;
@@ -16,6 +18,7 @@ public class Income extends AppCompatActivity {
     private MemoAdapter memoAdapter;
     ListView listView;
     TextView totalTextView;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,7 @@ public class Income extends AppCompatActivity {
         setContentView(R.layout.activity_fixed__spent);
 
         totalTextView = (TextView) findViewById(R.id.totalFixedAmountTextView);
+        sharedPreferences = this.getSharedPreferences("com.bikash.moneymanager", Context.MODE_PRIVATE);
 
 
 
@@ -71,6 +75,7 @@ public class Income extends AppCompatActivity {
                                 MainActivity.incomeArrayList.remove(position);
                                 memoAdapter.notifyDataSetChanged();
 
+                                sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
                             }
                         })
                         .setNegativeButton("No", null)
