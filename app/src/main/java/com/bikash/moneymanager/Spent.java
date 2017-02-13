@@ -77,7 +77,6 @@ public class Spent extends AppCompatActivity {
                                 MainActivity.spentArrayList.remove(position);
                                 memoAdapter.notifyDataSetChanged();
 
-
                                 sharedPreferences.edit().putString("remaining", MainActivity.remaining.toString()).apply();
 
                             }
